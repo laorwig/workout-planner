@@ -30,7 +30,7 @@
   --r:16px;--rm:12px;--rs:8px;
   --st:env(safe-area-inset-top,0px);
   --sb:env(safe-area-inset-bottom,0px);
-  --tab-h:calc(56px + var(--sb));
+  --tab-h:calc(62px + var(--sb));
 }
 html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-direction:column;}
@@ -100,7 +100,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 .pg{padding:1rem;}
 
 /* ── BOTTOM TABS ── */
-.btabs{position:fixed;bottom:0;left:0;right:0;height:var(--tab-h);background:var(--bg);border-top:1px solid var(--border);display:flex;align-items:flex-start;padding-top:8px;z-index:100;}
+.btabs{position:fixed;bottom:0;left:0;right:0;height:var(--tab-h);background:var(--bg);border-top:1px solid var(--border);display:flex;align-items:flex-start;padding-top:10px;padding-bottom:var(--sb);z-index:100;}
 .btab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:0 4px;transition:all 0.15s;}
 .btab-icon{font-size:22px;line-height:1;}
 .btab-label{font-size:10px;font-weight:500;color:var(--t3);letter-spacing:0.2px;}
@@ -558,6 +558,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
     <!-- PROGRESS -->
     <div id="t-progress" class="pg hidden">
       <div class="sec">Progress</div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;font-size:12px;color:var(--t2);line-height:1.6;">Pick a day below to see your logged sessions. Select an exercise from the dropdown to chart your weight over time.</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;" id="pdb"></div>
       <div style="background:var(--sheet);border-radius:var(--r);padding:1rem;margin-bottom:0.75rem;border:1px solid rgba(34,197,94,0.15);">
         <select class="chart-sel" id="chexs" onchange="rChart()"><option value="">Select exercise to chart...</option></select>
@@ -718,6 +719,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
       <div class="fg"><label>Sex</label><select id="csex"><option value="m">Male</option><option value="f">Female</option></select></div>
     </div>
     <div class="fg" style="margin-bottom:0;"><label>Activity</label><select id="cact"><option value="1.375">Lightly active</option><option value="1.55" selected>Moderately active</option><option value="1.725">Very active</option></select></div>
+    <div class="fg" style="margin-top:8px;margin-bottom:0;"><label>Deficit / goal speed</label><select id="cdeficit"><option value="0">Maintenance (no deficit)</option><option value="250">Conservative −250 cal · ~0.5 lb/week</option><option value="450" selected>Moderate −450 cal · ~1 lb/week ✓ recommended</option><option value="600">Aggressive −600 cal · ~1.25 lbs/week</option><option value="800">Very aggressive −800 cal · ~1.5 lbs/week</option></select></div>
     <button class="btn" onclick="calcC()" style="margin-top:0.75rem;">calculate</button>
     <div id="cout" class="hidden" style="margin-top:0.75rem;padding:1rem;background:var(--sheet2);border-radius:var(--rm);border:1px solid rgba(34,197,94,0.2);">
       <div class="mets" style="margin-bottom:0.75rem;">
@@ -832,7 +834,7 @@ window.delEd=async()=>{if(!eE)return;await dS(`rep/workouts/${CU}/${wD}/${eE.sk}
 // ── PROGRESS ──
 function rPDB(){const el=document.getElementById('pdb');if(!el)return;const u=uD();const gd=u.gymDays||[];el.innerHTML=gd.map(dow=>`<div style="padding:6px 13px;font-size:12px;font-weight:500;border-radius:20px;cursor:pointer;border:1px solid ${dow===pD?'var(--g)':'var(--border)'};background:${dow===pD?'var(--g)':'var(--bg3)'};color:${dow===pD?'#0d1a0d':'var(--t2)'};transition:all 0.15s;" onclick="sPD(${dow})">${DN[dow]}</div>`).join('');}
 window.sPD=dow=>{pD=dow;rPDB();rPC();rChart();}
-function rPC(){const el=document.getElementById('pcon');if(!el)return;const dd=wTs()[pD]||{};const keys=Object.keys(dd).sort();const u=uD();const sp=u?.splits?.[pD]||'full';const loc=u?.location||'fullgym';const exs=EXERCISES[loc]?.[sp]||[];const sel=document.getElementById('chexs');if(sel){const prev=sel.value;sel.innerHTML='<option value="">Select exercise to chart...</option>';exs.forEach(ex=>sel.innerHTML+=`<option value="${ex.id}">${ex.name}</option>`);if(prev&&exs.find(e=>e.id===prev)){sel.value=prev;rChart();}else document.getElementById('chcard').classList.add('hidden');}if(!keys.length){el.innerHTML=`<div style="background:var(--sheet);border-radius:var(--r);padding:1rem;color:var(--sheet-t2);font-size:13px;border:1px solid rgba(34,197,94,0.15);">No sessions yet for ${DF[pD]}.<br><br>Head to Workouts or tap a calendar day to log your first session!</div>`;return;}let h='';exs.forEach(ex=>{const logs=keys.map(k=>dd[k]).filter(s=>s?.weights?.[ex.id]).map(s=>({date:s.date,w:s.weights[ex.id]}));if(!logs.length)return;const u2=ex.isBodyweight?'reps':'lbs';h+=`<div style="background:var(--sheet);border-radius:var(--r);padding:1rem;margin-bottom:0.7rem;border:1px solid rgba(34,197,94,0.15);"><div style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--sheet-t1);">${ex.name}</div>`;logs.slice(-8).forEach((log,i,arr)=>{const prev=i>0?arr[i-1].w:null;let d='';if(!prev)d='<span class="hdt dfirst">first</span>';else if(log.w>prev)d=`<span class="hdt dup">+${Math.round(log.w-prev)} ${u2}</span>`;else if(log.w<prev)d=`<span class="hdt ddown">${Math.round(log.w-prev)} ${u2}</span>`;else d='<span class="hdt dsame">same</span>';h+=`<div class="hi"><span class="hd">${log.date}</span><span class="hw">${log.w} ${u2}</span>${d}</div>`;});h+='</div>';});el.innerHTML=h||`<div style="background:var(--sheet);border-radius:var(--r);padding:1rem;color:var(--sheet-t2);font-size:13px;border:1px solid rgba(34,197,94,0.15);">No weights entered yet.</div>`;}
+function rPC(){const el=document.getElementById('pcon');if(!el)return;const dd=wTs()[pD]||{};const keys=Object.keys(dd).sort();const u=uD();const sp=u?.splits?.[pD]||'full';const loc=u?.location||'fullgym';const exs=EXERCISES[loc]?.[sp]||[];const sel=document.getElementById('chexs');if(sel){const prev=sel.value;sel.innerHTML='<option value="">Select exercise to chart...</option>';exs.forEach(ex=>sel.innerHTML+=`<option value="${ex.id}">${ex.name}</option>`);if(prev&&exs.find(e=>e.id===prev)){sel.value=prev;rChart();}else document.getElementById('chcard').classList.add('hidden');}if(!keys.length){el.innerHTML=`<div style="background:var(--sheet);border-radius:var(--r);padding:1.5rem;border:1px solid rgba(34,197,94,0.15);text-align:center;"><div style="font-size:32px;margin-bottom:0.75rem;">📊</div><div style="font-size:15px;font-weight:600;color:var(--sheet-t1);margin-bottom:0.5rem;">No sessions logged yet</div><div style="font-size:13px;color:var(--sheet-t2);line-height:1.7;">Head to the <strong>Workouts tab</strong> and enter your weights for ${DF[pD]}.<br><br>After 3 sessions on the same day, you'll see a chart showing your progress over time — weight going up means it's working.</div></div>`;return;}let h='';exs.forEach(ex=>{const logs=keys.map(k=>dd[k]).filter(s=>s?.weights?.[ex.id]).map(s=>({date:s.date,w:s.weights[ex.id]}));if(!logs.length)return;const u2=ex.isBodyweight?'reps':'lbs';h+=`<div style="background:var(--sheet);border-radius:var(--r);padding:1rem;margin-bottom:0.7rem;border:1px solid rgba(34,197,94,0.15);"><div style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--sheet-t1);">${ex.name}</div>`;logs.slice(-8).forEach((log,i,arr)=>{const prev=i>0?arr[i-1].w:null;let d='';if(!prev)d='<span class="hdt dfirst">first</span>';else if(log.w>prev)d=`<span class="hdt dup">+${Math.round(log.w-prev)} ${u2}</span>`;else if(log.w<prev)d=`<span class="hdt ddown">${Math.round(log.w-prev)} ${u2}</span>`;else d='<span class="hdt dsame">same</span>';h+=`<div class="hi"><span class="hd">${log.date}</span><span class="hw">${log.w} ${u2}</span>${d}</div>`;});h+='</div>';});el.innerHTML=h||`<div style="background:var(--sheet);border-radius:var(--r);padding:1rem;color:var(--sheet-t2);font-size:13px;border:1px solid rgba(34,197,94,0.15);">No weights entered yet.</div>`;}
 window.rChart=()=>{const eid=document.getElementById('chexs')?.value;const card=document.getElementById('chcard');if(!eid||!card){card?.classList.add('hidden');return;}const dd=wTs()[pD]||{};const keys=Object.keys(dd).sort();const u=uD();const sp=u?.splits?.[pD]||'full';const loc=u?.location||'fullgym';const exs=EXERCISES[loc]?.[sp]||[];const ex=exs.find(e=>e.id===eid);const logs=keys.map(k=>dd[k]).filter(s=>s?.weights?.[eid]).map(s=>({date:s.date,w:s.weights[eid]}));if(logs.length<3){card.classList.add('hidden');sT(`Log ${3-logs.length} more session${3-logs.length>1?'s':''} to see chart`);return;}card.classList.remove('hidden');document.getElementById('cht').textContent=`${ex?.name||eid} — weight over time`;const canvas=document.getElementById('pc');canvas.width=canvas.parentElement.offsetWidth||300;if(chi)chi.destroy();const u2=ex?.isBodyweight?'reps':'lbs';chi=new Chart(canvas,{type:'line',data:{labels:logs.map(l=>l.date),datasets:[{data:logs.map(l=>l.w),borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.08)',borderWidth:2,pointBackgroundColor:'#22c55e',pointRadius:4,tension:0.3,fill:true}]},options:{responsive:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y} ${u2}`}}},scales:{x:{ticks:{color:'#6b7280',font:{size:10},maxTicksLimit:6},grid:{display:false}},y:{ticks:{color:'#6b7280',font:{size:10},callback:v=>v+' '+u2},grid:{color:'rgba(34,197,94,0.06)'}}}}});};
 // ── FOOD / CALORIES ──
 window.setQT=t=>{['text','barcode','photo'].forEach(x=>{document.getElementById('qp-'+x).classList.toggle('hidden',x!==t);document.getElementById('qt-'+x).classList.toggle('on',x===t);});if(t!=='barcode'&&bcS)stopBC();};
@@ -861,7 +863,31 @@ function rSetProf(){const el=document.getElementById('set-prof');if(!el)return;c
 function rSetSplits(){const el=document.getElementById('set-splits');if(!el)return;const u=uD();const gd=u.gymDays||[];if(!gd.length){el.innerHTML='<div style="font-size:13px;color:var(--sheet-t2);">no gym days set.</div>';return;}el.innerHTML=gd.map(dow=>{const sp=u.splits?.[dow]||'full';return`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(34,197,94,0.1);"><div style="font-size:13px;font-weight:600;width:36px;color:var(--g);">${DN[dow]}</div><select style="flex:1;padding:6px 10px;font-size:12px;background:var(--sheet2);border:1px solid rgba(34,197,94,0.2);border-radius:var(--rs);color:var(--sheet-t1);font-family:'DM Sans',sans-serif;-webkit-appearance:none;" onchange="sSpl(${dow},this.value)">${Object.entries(SPLIT_LABELS).map(([k,v])=>`<option value="${k}" ${k===sp?'selected':''}>${v}</option>`).join('')}</select></div>`;}).join('');}
 window.sSpl=async(dow,sp)=>{await dS(`rep/users/${CU}/splits/${dow}`,sp);sT('Split updated ✓');};
 // ── CALCULATOR ──
-window.calcC=()=>{const w=parseFloat(document.getElementById('cwt').value);const h=parseFloat(document.getElementById('cht2').value);const a=parseFloat(document.getElementById('cage').value);const s=document.getElementById('csex').value;const act=parseFloat(document.getElementById('cact').value);if(!w||!h||!a)return;const bmr=s==='f'?(10*w*0.453592+6.25*h*2.54-5*a-161):(10*w*0.453592+6.25*h*2.54-5*a+5);const tdee=Math.round(bmr*act);const u=uD();const adj={fatloss:-450,muscle:300,both:0};const cal=tdee+(adj[u.goal]||0);const prot=Math.round(w*0.8);const fat=Math.round(cal*0.25/9);const carb=Math.round((cal-prot*4-fat*9)/4);sT2('rm',tdee.toLocaleString());sT2('rt',cal.toLocaleString());sT2('rp',prot+'g');const lbl={fatloss:'fat loss (−450 cal)',muscle:'muscle gain (+300 cal)',both:'recomp (maintenance)'};sT2('radv',`Goal: ${lbl[u.goal]||'maintenance'} — eat ${cal.toLocaleString()} cal/day with ${prot}g protein.`);document.getElementById('cout').classList.remove('hidden');pT={cal,prot,carb,fat};};
+window.calcC=()=>{
+  const w=parseFloat(document.getElementById('cwt').value);
+  const h=parseFloat(document.getElementById('cht2').value);
+  const a=parseFloat(document.getElementById('cage').value);
+  const s=document.getElementById('csex').value;
+  const act=parseFloat(document.getElementById('cact').value);
+  const deficit=parseFloat(document.getElementById('cdeficit').value)||0;
+  if(!w||!h||!a)return;
+  const bmr=s==='f'?(10*w*0.453592+6.25*h*2.54-5*a-161):(10*w*0.453592+6.25*h*2.54-5*a+5);
+  const tdee=Math.round(bmr*act);
+  const cal=tdee-deficit;
+  const prot=Math.round(w*0.8);
+  const fat=Math.round(cal*0.25/9);
+  const carb=Math.round((cal-prot*4-fat*9)/4);
+  sT2('rm',tdee.toLocaleString());
+  sT2('rt',cal.toLocaleString());
+  sT2('rp',prot+'g');
+  const lbsPerWeek=(deficit/3500*7).toFixed(1);
+  const advice=deficit===0
+    ?`Maintenance — eat ${cal.toLocaleString()} cal/day with ${prot}g protein. No deficit, focus on building muscle.`
+    :`At a −${deficit} cal deficit you'll lose roughly ${lbsPerWeek} lbs/week. Eat ${cal.toLocaleString()} cal/day with at least ${prot}g protein to protect muscle. ${deficit>600?'⚠️ At this deficit make sure you hit your protein target every day — it becomes critical for preserving muscle.':''}`;
+  sT2('radv',advice);
+  document.getElementById('cout').classList.remove('hidden');
+  pT={cal,prot,carb,fat};
+};
 window.saveTg=async()=>{if(!pT)return;await dS(`rep/users/${CU}/calTargets`,pT);cOv2('calc-modal');sT('Targets updated ✓');};
 // ── MORE / NAV ──
 window.showMore=()=>{rSetProf();rSetSplits();rRecs();document.getElementById('more-modal').classList.remove('hidden');};
