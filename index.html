@@ -857,8 +857,12 @@ function toggleObDay(el,max){
   obData.gymDays=days;
   document.getElementById('ob-b6').disabled=days.length!==max;
 }
-window.obNext=(step,skip)=>{
-  if(step===1){ const v=document.getElementById('ob-user').value.trim().toLowerCase(); if(!v)return; obData.username=v; }
+window.obNext=async(step,skip)=>{
+  if(step===1){
+    const v=document.getElementById('ob-user').value.trim().toLowerCase(); if(!v)return; obData.username=v;
+    const ex=await dbGet(`rep/users/${v}`);
+    if(ex){ await loadUser(v); showApp(); return; }
+  }
   if(step===4&&!skip){ obData.sex=document.getElementById('ob-sex').value; obData.age=parseInt(document.getElementById('ob-age').value)||0; obData.weight=parseFloat(document.getElementById('ob-wt').value)||0; obData.height=parseFloat(document.getElementById('ob-ht').value)||0; }
   document.getElementById(`obs-${step}`).classList.remove('active');
   const nxt=step+1;
