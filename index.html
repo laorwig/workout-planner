@@ -102,7 +102,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 
 /* CARDS */
 .card{background:var(–bg2);border:1px solid var(–bdr);border-radius:var(–r);padding:1rem 1.1rem;margin-bottom:0.75rem;}
-.wcard{background:var(–sheet);border-radius:var(–r);padding:1rem 1.1rem;margin-bottom:0.75rem;border:1px solid rgba(34,197,94,0.15);}
+.wcard{background:var(–sheet);border-radius:var(–r);padding:1rem 1.1rem;margin-bottom:0.75rem;border:1px solid rgba(34,197,94,0.2);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
 .sec{font-family:Georgia,serif;font-size:20px;font-weight:400;color:var(–t1);margin-bottom:1rem;letter-spacing:0.5px;}
 
 /* DUAL RINGS */
@@ -186,7 +186,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 /* CARDIO */
 .cs{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(34,197,94,0.12);}
 .cst{font-size:11px;font-weight:600;color:var(–st2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.75rem;}
-.cr2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.cr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .cif label{font-size:10px;color:var(–st3);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px;}
 .cif input,.cif select{width:100%;padding:8px;font-size:12px;background:var(–sheet2);border:1px solid rgba(34,197,94,0.2);border-radius:var(–rs);color:var(–st1);font-family:‘DM Sans’,sans-serif;-webkit-appearance:none;}
 
@@ -274,7 +274,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 .wd{flex:1;text-align:center;cursor:pointer;padding:4px 2px;border-radius:var(–rs);transition:all 0.15s;border:1px solid transparent;}
 .wd.sel{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.06);}
 .wd-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;color:var(–t3);}
-.wd-num{font-size:13px;font-weight:500;color:var(–t2);margin:3px auto;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.wd-num{font-size:11px;font-weight:500;color:var(–t2);margin:3px auto;min-width:24px;height:24px;padding:0 2px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
 .wd-num.gym{color:var(–g3);}.wd-num.today{background:var(–g);color:#0d1a0d;font-weight:700;}
 .wd-num.logged{background:var(–g);color:#0d1a0d;}
 .wd-dot{width:4px;height:4px;border-radius:50%;background:var(–g);margin:2px auto 0;opacity:0.6;}
@@ -310,6 +310,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 .csel{width:100%;padding:9px 10px;font-size:13px;background:var(–sheet2);border:1px solid rgba(34,197,94,0.2);border-radius:var(–rm);color:var(–st1);font-family:‘DM Sans’,sans-serif;margin-bottom:0.75rem;-webkit-appearance:none;}
 
 /* BUTTONS */
+.sh-inner{padding:0;}
 .btn{width:100%;padding:13px;background:var(–g);color:#0d1a0d;border:none;border-radius:var(–rm);font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;margin-top:0.75rem;}
 .btn:active{transform:scale(0.98);}
 .btn.sec{background:var(–sheet2);color:var(–st1);border:1px solid rgba(34,197,94,0.2);font-weight:500;}
@@ -318,8 +319,8 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 .btn.amb{background:var(–ambd);color:var(–amb);border:1px solid var(–ambb);}
 
 /* MODALS / SHEETS */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;display:flex;align-items:flex-end;}
-.sh{background:var(–sheet);border-radius:var(–r) var(–r) 0 0;padding:0 1.25rem 1.25rem;padding-bottom:calc(1.25rem + var(–sb));width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;display:flex;align-items:flex-end;}
+.sh{background:var(–sheet);border-radius:var(–r) var(–r) 0 0;padding:0 1.25rem calc(1.25rem + var(–sb));width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
 .sh-drag{width:44px;height:5px;background:#e5e7eb;border-radius:3px;margin:12px auto 16px;display:block;cursor:grab;flex-shrink:0;}
 .sht{font-family:Georgia,serif;font-size:20px;font-weight:400;margin-bottom:4px;color:var(–st1);}
 .shs{font-size:12px;color:var(–st2);margin-bottom:1.25rem;}
@@ -358,6 +359,13 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
 .prof-stat-v{font-size:15px;font-weight:700;color:var(–g);}
 .prof-stat-l{font-size:9px;color:var(–st3);margin-top:1px;text-transform:uppercase;letter-spacing:0.3px;}
 
+/* MORE MENU */
+.more-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(34,197,94,0.08);cursor:pointer;}
+.more-item:last-child{border-bottom:none;}
+.more-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(–sheet2);}
+.more-lbl{font-size:14px;font-weight:500;color:var(–st1);}
+.more-desc{font-size:11px;color:var(–st2);margin-top:1px;}
+.more-arr{margin-left:auto;font-size:18px;color:var(–st3);flex-shrink:0;}
 /* WEEKLY SUMMARY */
 .wsum{background:linear-gradient(135deg,var(–bg2),var(–bg3));border:1px solid var(–gb2);border-radius:var(–r);padding:1rem;margin-bottom:0.75rem;}
 .wsum-t{font-family:Georgia,serif;font-size:15px;color:var(–g2);margin-bottom:0.75rem;}
@@ -487,11 +495,14 @@ body{font-family:'DM Sans',sans-serif;color:var(--t1);display:flex;flex-directio
     </div>
     <div id="qp-barcode" class="hidden">
       <div style="display:flex;gap:8px;margin-bottom:0.75rem;">
-        <button class="cbtn" style="flex:1;" onclick="startBC()"><span>📷</span> scan barcode</button>
+        <button class="cbtn" style="flex:1;" onclick="document.getElementById('bc-file').click()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="#4b5563" stroke-width="1.3"/><rect x="10" y="1" width="5" height="5" rx="1" stroke="#4b5563" stroke-width="1.3"/><rect x="1" y="10" width="5" height="5" rx="1" stroke="#4b5563" stroke-width="1.3"/><path d="M11 10h4v4" stroke="#4b5563" stroke-width="1.3" stroke-linecap="round"/></svg>
+          scan barcode
+        </button>
         <button style="padding:10px 14px;background:var(--bg3);color:var(--t2);border:1px solid var(--bdr);border-radius:var(--rm);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;" onclick="manualBC()">enter number</button>
       </div>
-      <button class="btn sec sm" id="bccan" onclick="stopBC()" style="display:none;margin-top:0;">cancel</button>
-      <video id="bcvid" class="hidden" playsinline autoplay muted style="width:100%;border-radius:var(--rm);margin-top:0.5rem;max-height:200px;object-fit:cover;border:1px solid var(--gb);"></video>
+      <input type="file" id="bc-file" accept="image/*" capture="environment" onchange="handleBCScan(event)" style="display:none;">
+      <div style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:0.5rem;">Opens camera — point at barcode and take photo</div>
       <div id="bcres" class="hidden"></div>
     </div>
     <div id="qp-photo" class="hidden">
@@ -838,7 +849,7 @@ async function saveFood(name,cal,prot,carb,fat,fiber){const id='f'+Date.now();aw
 window.toggleFavFromLog=async(k,name,cal,prot,carb,fat,fiber)=>{const all=Object.values(LD?.foods?.[CU]||{});const existing=all.find(f=>f.name===name);if(existing){await dS(`rep/foods/${CU}/${existing.id}/fav`,!existing.fav);}else{const id='f'+Date.now();await dS(`rep/foods/${CU}/${id}`,{id,name,cal,prot,carb,fat,fiber:fiber||0,lastUsed:Date.now(),fav:true});}};
 
 // HOME FOOD LOG
-function rHomeFoodLog(){const el=document.getElementById('home-food-log');if(!el)return;const e=cls()?.[ldk()]||{};const cats={breakfast:[],lunch:[],dinner:[],snack:[]};Object.entries(e).forEach(([k,en])=>(cats[en.cat||'snack']||cats.snack).push({k,...en}));const cl={breakfast:'🌅 Breakfast',lunch:'☀️ Lunch',dinner:'🌙 Dinner',snack:'🍎 Snacks'};let h='';let any=false;Object.entries(cats).forEach(([cat,items])=>{if(!items.length)return;any=true;const tot=items.reduce((a,en)=>a+(en.cal||0),0);h+=`<div style="margin-bottom:3px;"><div class="home-meal-hdr">${cl[cat]}<span>${Math.round(tot)} cal</span></div>`;items.forEach(en=>{const isFav2=Object.values(LD?.foods?.[CU]||{}).some(f=>f.fav&&f.name===en.name);h+=`<div class="home-meal-i"><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:500;color:var(--st1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${en.name}</div><div style="font-size:10px;color:var(--st2);">P:${Math.round(en.prot||0)}g · C:${Math.round(en.carb||0)}g · F:${Math.round(en.fat||0)}g${en.fiber?' · Fib:'+Math.round(en.fiber)+'g':''}</div></div><span style="font-size:13px;font-weight:600;color:var(--g);margin:0 4px;">${Math.round(en.cal||0)}</span><button style="background:none;border:none;cursor:pointer;padding:2px 3px;" onclick="toggleFavFromLog('${en.k}','${en.name.replace(/'/g,"\\'")}',${en.cal||0},${en.prot||0},${en.carb||0},${en.fat||0},${en.fiber||0})"><svg width="14" height="14" viewBox="0 0 14 14" fill="${isFav2?'#ef4444':'none'}"><path d="M7 12C7 12 1.5 8.5 1.5 5C1.5 3.3 2.9 2 4.5 2C5.5 2 6.3 2.5 6.8 3.3C7.3 2.5 8.1 2 9.1 2C10.7 2 12.1 3.3 12.1 5C12.5 8.5 7 12 7 12Z" stroke="#ef4444" stroke-width="1.2" stroke-linejoin="round"/></svg></button><button style="background:none;border:none;color:var(--st3);font-size:15px;cursor:pointer;" onclick="dFood('${en.k}')">&#215;</button></div>`;});h+=`</div>`;});const blist=burns()?.[ldk()]||{};Object.values(blist).forEach(b=>{if(!b.cal)return;any=true;h+=`<div class="home-meal-i"><div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--amb2);">🔥 ${b.name||'Activity'}</div></div><span style="font-size:13px;font-weight:600;color:var(--amb);">−${b.cal}</span></div>`;});if(any){h=`<div class="wcard" style="margin-bottom:0.75rem;">${h}<div style="margin-top:0.75rem;display:flex;gap:6px;"><button onclick="openFoodHist()" style="flex:1;padding:8px;background:var(--sheet2);border:1px solid rgba(34,197,94,0.15);border-radius:var(--rs);color:var(--st2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">view history</button></div></div>`;}else{h='<div class="wcard" style="margin-bottom:0.75rem;"><div style="font-size:13px;color:var(--st2);text-align:center;padding:0.5rem 0;">no food logged yet today</div></div>';}el.innerHTML=h;}
+function rHomeFoodLog(){const el=document.getElementById('home-food-log');if(!el)return;const e=cls()?.[ldk()]||{};const cats={breakfast:[],lunch:[],dinner:[],snack:[]};Object.entries(e).forEach(([k,en])=>{if(!en||typeof en!=='object')return;const cat=en.cat||'snack';(cats[cat]||cats.snack).push({k,...en});});const cl={breakfast:'🌅 Breakfast',lunch:'☀️ Lunch',dinner:'🌙 Dinner',snack:'🍎 Snacks'};let h='';let any=false;Object.entries(cats).forEach(([cat,items])=>{if(!items.length)return;any=true;const tot=items.reduce((a,en)=>a+(en.cal||0),0);h+=`<div style="margin-bottom:3px;"><div class="home-meal-hdr">${cl[cat]}<span>${Math.round(tot)} cal</span></div>`;items.forEach(en=>{const isFav2=Object.values(LD?.foods?.[CU]||{}).some(f=>f.fav&&f.name===en.name);h+=`<div class="home-meal-i"><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:500;color:var(--st1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${en.name}</div><div style="font-size:10px;color:var(--st2);">P:${Math.round(en.prot||0)}g · C:${Math.round(en.carb||0)}g · F:${Math.round(en.fat||0)}g${en.fiber?' · Fib:'+Math.round(en.fiber)+'g':''}</div></div><span style="font-size:13px;font-weight:600;color:var(--g);margin:0 4px;">${Math.round(en.cal||0)}</span><button style="background:none;border:none;cursor:pointer;padding:2px 3px;" onclick="toggleFavFromLog('${en.k}','${en.name.replace(/'/g,"\\'")}',${en.cal||0},${en.prot||0},${en.carb||0},${en.fat||0},${en.fiber||0})"><svg width="14" height="14" viewBox="0 0 14 14" fill="${isFav2?'#ef4444':'none'}"><path d="M7 12C7 12 1.5 8.5 1.5 5C1.5 3.3 2.9 2 4.5 2C5.5 2 6.3 2.5 6.8 3.3C7.3 2.5 8.1 2 9.1 2C10.7 2 12.1 3.3 12.1 5C12.5 8.5 7 12 7 12Z" stroke="#ef4444" stroke-width="1.2" stroke-linejoin="round"/></svg></button><button style="background:none;border:none;color:var(--st3);font-size:15px;cursor:pointer;" onclick="dFood('${en.k}')">&#215;</button></div>`;});h+=`</div>`;});const blist=burns()?.[ldk()]||{};Object.values(blist).forEach(b=>{if(!b.cal)return;any=true;h+=`<div class="home-meal-i"><div style="flex:1;"><div style="font-size:13px;font-weight:500;color:var(--amb2);">🔥 ${b.name||'Activity'}</div></div><span style="font-size:13px;font-weight:600;color:var(--amb);">−${b.cal}</span></div>`;});if(any){h=`<div class="wcard" style="margin-bottom:0.75rem;">${h}<div style="margin-top:0.75rem;display:flex;gap:6px;"><button onclick="openFoodHist()" style="flex:1;padding:8px;background:var(--sheet2);border:1px solid rgba(34,197,94,0.15);border-radius:var(--rs);color:var(--st2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">view history</button></div></div>`;}else{h='<div class="wcard" style="margin-bottom:0.75rem;"><div style="font-size:13px;color:var(--st2);text-align:center;padding:0.5rem 0;">no food logged yet today</div></div>';}el.innerHTML=h;}
 
 // BW PROMPT
 function rBWPrompt(){const el=document.getElementById('bw-prompt');if(!el)return;const bw=LD?.bodyweight?.[CU]||{};if(bw[ldk()]){el.innerHTML='';return;}el.innerHTML=`<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rm);padding:10px 14px;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:12px;color:var(--t2);">Log today's weight to track your progress</div><button onclick="openBWLog()" style="padding:6px 12px;background:var(--g);color:#0d1a0d;border:none;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;">log weight</button></div>`;}
@@ -893,8 +904,8 @@ window.confF=async src=>{if(!pF)return;const m=parseFloat(src==='text'?document.
 async function addF(name,cal,prot,carb,fat,srv,cat,fiber){const key=Date.now().toString();const m=parseFloat(srv)||1;await dS(`rep/calories/${CU}/${ldk()}/${key}`,{name,cat:cat||'snack',cal:Math.round(cal*m),prot:Math.round(prot*m*10)/10,carb:Math.round(carb*m*10)/10,fat:Math.round(fat*m*10)/10,fiber:Math.round((fiber||0)*m*10)/10,servings:m});sT(name+' added ✓');}
 
 // BARCODE
-window.startBC=async()=>{const vid=document.getElementById('bcvid');document.getElementById('bcres').classList.add('hidden');document.getElementById('bccan').style.display='block';try{bcS=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});vid.srcObject=bcS;vid.classList.remove('hidden');if('BarcodeDetector'in window){const det=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']});bcI=setInterval(async()=>{try{const codes=await det.detect(vid);if(codes.length){stopBC();lookupBC(codes[0].rawValue);}}catch{}},400);}else{stopBC();const code=prompt('Enter barcode number:');if(code)lookupBC(code.trim());}}catch{stopBC();sT('Camera unavailable');const code=prompt('Enter barcode number:');if(code)lookupBC(code.trim());}};
-window.stopBC=()=>{clearInterval(bcI);bcI=null;if(bcS){bcS.getTracks().forEach(t=>t.stop());bcS=null;}document.getElementById('bcvid').classList.add('hidden');document.getElementById('bccan').style.display='none';};
+window.handleBCScan=async(event)=>{const file=event.target.files?.[0];if(!file)return;document.getElementById('bc-file').value='';document.getElementById('bcres').classList.add('hidden');sT('Reading barcode...');try{if('BarcodeDetector'in window){const img=await createImageBitmap(file);const det=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128','code_39','qr_code']});const codes=await det.detect(img);if(codes.length){lookupBC(codes[0].rawValue);return;}sT('No barcode found — try again or enter manually');}else{const code=prompt('BarcodeDetector unavailable. Enter number manually:');if(code)lookupBC(code.trim());}}catch(e){console.error(e);sT('Could not read — try entering number manually');}};
+window.stopBC=()=>{};
 window.manualBC=()=>{const code=prompt('Enter barcode number:');if(code)lookupBC(code.trim());};
 async function lookupBC(code){sT('Looking up...');try{const res=await fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`);const data=await res.json();if(data.status!==1||!data.product){const name=prompt('Product not found. Describe it:');if(name){document.getElementById('food-in').value=name;setQT('text');qEst();}return;}const p=data.product,n=p.nutriments;pF={name:p.product_name||'Scanned product',cal:n['energy-kcal_serving']||n['energy-kcal_100g']||0,prot:n['proteins_serving']||n['proteins_100g']||0,carb:n['carbohydrates_serving']||n['carbohydrates_100g']||0,fat:n['fat_serving']||n['fat_100g']||0,fiber:n['fiber_serving']||n['fiber_100g']||0};document.getElementById('bcres').innerHTML=`<div class="aib" style="margin-top:0.75rem;"><div class="ait">${pF.name}</div><div class="air"><span class="ail">Calories</span><span class="aiv">${Math.round(pF.cal)}</span></div><div class="air"><span class="ail">Protein</span><span class="aiv">${Math.round(pF.prot)}g</span></div><div class="air"><span class="ail">Carbs</span><span class="aiv">${Math.round(pF.carb)}g</span></div><div class="air"><span class="ail">Fat</span><span class="aiv">${Math.round(pF.fat)}g</span></div><div class="srv-r" style="margin-top:0.75rem;"><label>Servings:</label><input type="number" class="srv-in" id="bcsrv" value="1" min="0.25" step="0.25"></div><button class="btn sm" onclick="confF('barcode')" style="margin-top:0.75rem;">add to log</button></div>`;document.getElementById('bcres').classList.remove('hidden');}catch{sT('Lookup failed');}}
 
