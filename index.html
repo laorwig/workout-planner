@@ -784,15 +784,12 @@ function getTodayBurned(){const b=burns()?.[ldk()]||{};let tot=0;Object.values(b
 
 // RINGS
 function rRings(){const e=cls()?.[ldk()]||{};let tc=0,tp=0,tca=0,tf=0,tfib=0;Object.values(e).forEach(en=>{tc+=en.cal||0;tp+=en.prot||0;tca+=en.carb||0;tf+=en.fat||0;tfib+=en.fiber||0;});const t=getTargets();const burned=getTodayBurned();
-// net banner
-const nb=document.getElementById('net-banner');if(nb){const net=t.cal-Math.round(tc)+burned;const over=net<0;nb.className='net-banner '+(over?'over':'under');nb.innerHTML=`<div class="net-num ${over?'over':'under'}">${Math.abs(net)}</div><div class="net-lbl ${over?'over':'under'}">${over?'cal over target today':'cal remaining today'}</div>`;}const net=t.cal-Math.round(tc)+burned;
-const eatPct=Math.min(100,Math.round(tc/t.cal*100));const bPct=Math.min(100,Math.round(burned/800*100));
+const net=t.cal-Math.round(tc)+burned;const eatPct=Math.min(100,Math.round(tc/(t.cal||1)*100));const bPct=Math.min(100,Math.round(burned/800*100));
 const er=document.getElementById('eaten-ring');if(er)er.style.strokeDashoffset=233-(233*eatPct/100);const br=document.getElementById('burned-ring');if(br)br.style.strokeDashoffset=233-(233*bPct/100);
 sT2('eaten-num',Math.round(tc));sT2('eaten-goal',t.cal);sT2('burned-num',burned);
-const nb=document.getElementById('net-banner');if(nb){const isOver=net<0;nb.className='net-banner '+(isOver?'over':'under');nb.innerHTML=`<div class="net-num ${isOver?'over':'under'}">${Math.abs(net)}</div><div class="net-lbl ${isOver?'over':'under'}">${isOver?'calories over target today':'calories remaining today'}</div>`;}
-sT2('cpl',`${Math.round(tp)}g/${t.prot}g`);sT2('ccl',`${Math.round(tca)}g/${t.carb}g`);sT2('cfl',`${Math.round(tf)}g/${t.fat}g`);const fTgt=t.fiber||25;sT2('cfibl',`${Math.round(tfib)}g/${fTgt}g`);sW('cfibp',Math.min(100,tfib/fTgt*100));
-const fiberTgt=t.fiber||25;sT2('cfibl',`${Math.round(tfib)}g/${fiberTgt}g`);
-sW('cpb',Math.min(100,Math.round(tp/t.prot*100)));sW('ccb',Math.min(100,Math.round(tca/t.carb*100)));sW('cfb',Math.min(100,Math.round(tf/t.fat*100)));sW('cfibp',Math.min(100,Math.round(tfib/fiberTgt*100)));}
+const nb=document.getElementById('net-banner');if(nb){const over=net<0;nb.className='net-banner '+(over?'over':'under');nb.innerHTML=`<div class="net-num ${over?'over':'under'}">${Math.abs(net)}</div><div class="net-lbl ${over?'over':'under'}">${over?'cal over target today':'cal remaining today'}</div>`;}
+sT2('cpl',`${Math.round(tp)}g/${t.prot}g`);sT2('ccl',`${Math.round(tca)}g/${t.carb}g`);sT2('cfl',`${Math.round(tf)}g/${t.fat}g`);const fTgt=t.fiber||25;sT2('cfibl',`${Math.round(tfib)}g/${fTgt}g`);
+sW('cpb',Math.min(100,Math.round(tp/(t.prot||1)*100)));sW('ccb',Math.min(100,Math.round(tca/(t.carb||1)*100)));sW('cfb',Math.min(100,Math.round(tf/(t.fat||1)*100)));sW('cfibp',Math.min(100,Math.round(tfib/fTgt*100)));}
 
 // BURN LOG
 window.openBurnLog=()=>{document.getElementById('act-in').value='';document.getElementById('act-res').classList.add('hidden');document.getElementById('act-manual').value='';document.getElementById('burn-modal').classList.remove('hidden');};
